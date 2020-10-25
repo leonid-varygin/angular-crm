@@ -1,20 +1,22 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../shared/services/auth.service";
-import {Router} from "@angular/router";
-import {Subscription} from "rxjs";
-import {MaterialService} from "../shared/classes/material.service";
+import {Component, OnDestroy, OnInit} from '@angular/core'
+import {FormControl, FormGroup, Validators} from '@angular/forms'
+import {AuthService} from '../shared/services/auth.service'
+import {Router} from '@angular/router'
+import {Subscription} from 'rxjs'
+import {MaterialService} from '../shared/classes/material.service'
 
 @Component({
   selector: 'app-register-page',
   templateUrl: './register-page.component.html',
-  styleUrls: ['./register-page.component.scss']
+  styleUrls: ['./register-page.component.css']
 })
 export class RegisterPageComponent implements OnInit, OnDestroy {
-  form: FormGroup;
+
+  form: FormGroup
   aSub: Subscription
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(private auth: AuthService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -25,14 +27,14 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.aSub) {
+    if (this.aSub) {
       this.aSub.unsubscribe()
     }
   }
 
   onSubmit() {
     this.form.disable()
-    const aSub = this.auth.register(this.form.value).subscribe(
+    this.aSub = this.auth.register(this.form.value).subscribe(
       () => {
         this.router.navigate(['/login'], {
           queryParams: {
@@ -40,10 +42,11 @@ export class RegisterPageComponent implements OnInit, OnDestroy {
           }
         })
       },
-      (error) => {
+      error => {
         MaterialService.toast(error.error.message)
         this.form.enable()
       }
     )
   }
+
 }
