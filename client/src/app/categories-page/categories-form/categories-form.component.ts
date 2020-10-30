@@ -17,7 +17,7 @@ export class CategoriesFormComponent implements OnInit {
   @ViewChild('input', {static: false}) inputRef: ElementRef
   form: FormGroup
   image: File
-  imagePreview: string | ArrayBuffer = ''
+  imagePreview
   isNew = true
   category: Category
 

@@ -11,7 +11,7 @@ import {FormGroup, FormControl, Validators} from '@angular/forms'
 })
 export class PositionsFormComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input('categoryId') categoryId: string
-  @ViewChild('modal', {static: false}) modalRef: ElementRef
+  @ViewChild('modal', {static:false}) modalRef: ElementRef
 
   positions: Position[] = []
   loading = false
